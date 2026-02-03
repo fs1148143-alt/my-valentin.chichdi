@@ -1,26 +1,29 @@
-body {
-    background-color: #ffdde1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: sans-serif;
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const question = document.getElementById("question");
+const message = document.getElementById("message");
+const buttons = document.querySelector(".buttons");
+
+// Tablet/Mobile ke liye touch fix
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Click hone se rokhne ke liye
+    moveButton();
+});
+
+noBtn.addEventListener("mouseover", moveButton);
+
+function moveButton() {
+    // Button ko random jagah bhejne ke liye
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    
+    noBtn.style.position = "fixed"; // Isse screen par kahin bhi ja sakega
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 }
-.container { text-align: center; }
-h1 { color: #d63384; font-size: 2rem; }
-button {
-    padding: 15px 25px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-#yesBtn { background-color: #ff4d6d; color: white; margin-right: 10px; }
-#noBtn {
-    background-color: #6c757d;
-    color: white;
-    position: fixed; /* Tablet/Mobile ke liye fixed sahi hai */
-    transition: 0.1s;
-}
-.hidden { display: none; }
+
+yesBtn.addEventListener("click", () => {
+    document.querySelector('.buttons').style.display = "none";
+    question.style.display = "none";
+    message.classList.remove("hidden");
+});
