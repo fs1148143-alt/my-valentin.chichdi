@@ -4,8 +4,10 @@ const mainCard = document.getElementById("main-card");
 const message = document.getElementById("message");
 
 function moveButton() {
-    // Isse button screen ke kinaro se bahar nahi jayega
-    const padding = 50;
+    // Button ko fixed karke screen par kahin bhi bhagaenge
+    noBtn.style.position = "fixed"; 
+    
+    const padding = 60;
     const maxX = window.innerWidth - noBtn.offsetWidth - padding;
     const maxY = window.innerHeight - noBtn.offsetHeight - padding;
     
@@ -16,14 +18,14 @@ function moveButton() {
     noBtn.style.top = randomY + "px";
 }
 
-// Mobile touch aur Mouse dono ke liye
+// Touch aur Mouse dono handle honge
+noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // Button click na ho jaye
+    e.preventDefault();
     moveButton();
 });
-noBtn.addEventListener("mouseover", moveButton);
 
 yesBtn.addEventListener("click", () => {
-    mainCard.classList.add("hidden");
+    mainCard.style.display = "none";
     message.classList.remove("hidden");
 });
